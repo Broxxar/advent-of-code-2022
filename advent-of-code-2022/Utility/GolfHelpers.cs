@@ -39,5 +39,13 @@ namespace AdventOfCode
                 functor(element);
             }
         }
+
+        public static IEnumerable<T[]> Clump<T>(this IEnumerable<T> enumerable, int clumpSize)
+        {
+            return enumerable.Select((element, index) => new { element, index })
+                .GroupBy(indexedElement => indexedElement.index / clumpSize)
+                .Select(group => group.Select(t => t.element))
+                .Select(group => group.ToArray());
+        }
     }
 }
