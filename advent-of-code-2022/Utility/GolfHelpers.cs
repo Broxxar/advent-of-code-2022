@@ -47,5 +47,17 @@ namespace AdventOfCode
                 .Select(group => group.Select(t => t.element))
                 .Select(group => group.ToArray());
         }
+
+        public static IEnumerable<T> SplitF<T>(this string str, Func<string, T> functor, char separator = '\n')  => str.Split(separator).Select(functor);
+
+        /// <summary>
+        /// Combines the common pattern of splitting a string and applying a functor to process the resulting array of strings.
+        /// </summary>
+        public static IEnumerable<T> SplitF<T>(this string str, Func<string, T> functor, string separator) => str.Split(separator).Select(functor);
+
+        /// <summary>
+        ///  Combines Select and ToArray with a functor to quickly make arrays.
+        /// </summary>
+        public static TDst[] Arrayify<TSrc, TDst>(this IEnumerable<TSrc> enumerable, Func<TSrc, TDst> functor) => enumerable.Select(functor).ToArray();
     }
 }

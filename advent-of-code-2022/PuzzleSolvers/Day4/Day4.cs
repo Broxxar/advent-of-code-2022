@@ -8,21 +8,17 @@ namespace AdventOfCode.Day4
         public int PartOne(string input)
         {
             return input
-                .Split('\n')
-                .SelectMany(l => l.Split(','))
-                .Select(e => e.Int2('-'))
-                .Clump(2)
-                .Count(p => p[0].x <= p[1].x && p[0].y >= p[1].y || p[1].x <= p[0].x && p[1].y >= p[0].y);
+                .SplitF(s => s.Split(',').Arrayify(Range<int>.Parse))
+                .Select(s => new {a = s[0], b = s[1]})
+                .Count(p => p.a.Contains(p.b) || p.b.Contains(p.a));
         }
 
         public int PartTwo(string input)
         {
             return input
-                .Split('\n')
-                .SelectMany(l => l.Split(','))
-                .Select(e => e.Int2('-'))
-                .Clump(2)
-                .Count(p => Enumerable.Range(p[0].x, p[0].y - p[0].x + 1).Any(i => Enumerable.Range(p[1].x, p[1].y - p[1].x + 1).Contains(i)));
+                .SplitF(s => s.Split(',').Arrayify(Range<int>.Parse))
+                .Select(s => new {a = s[0], b = s[1]})
+                .Count(p => p.a.Overlaps(p.b));
         }
     }
 }
