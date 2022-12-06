@@ -59,5 +59,9 @@ namespace AdventOfCode
         ///  Combines Select and ToArray with a functor to quickly make arrays.
         /// </summary>
         public static TDst[] Arrayify<TSrc, TDst>(this IEnumerable<TSrc> enumerable, Func<TSrc, TDst> functor) => enumerable.Select(functor).ToArray();
+
+        public static HashSet<T> Set<T>(this IEnumerable<T> enumerable) => enumerable.ToHashSet();
+
+        public static IEnumerable<int> Itr(this Range range) => Enumerable.Range(range.Start.Value, range.End.Value);
     }
 }
