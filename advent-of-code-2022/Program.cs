@@ -7,7 +7,7 @@ public static class Program
     private static void Main(string[] args)
     {
         var day = args[0].Int();
-        var input = File.ReadAllText($"Input/d{day}.txt").Trim();
+        var input = File.ReadAllText($"Input/d{day}.txt");
 
         var partOneAnswer = IPuzzleSolver.GetSolver(day).PartOne(input);
         var partTwoAnswer = IPuzzleSolver.GetSolver(day).PartTwo(input);
